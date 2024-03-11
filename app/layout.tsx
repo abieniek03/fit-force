@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ILayout } from "./_types/types";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 const font = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
@@ -12,8 +14,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<ILayout>) {
   return (
-    <html lang="pl">
-      <body className={`${font.className} text-content`}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="pl">
+        <body className={`${font.className} text-content`}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
