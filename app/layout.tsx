@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { ILayout } from "./_types/types";
+import { ILayout } from "@/app/_types/types";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { plPL } from "@clerk/localizations";
@@ -24,7 +24,11 @@ export default function RootLayout({ children }: Readonly<ILayout>) {
     <ClerkProvider
       localization={plPL}
       appearance={{
-        variables: { colorPrimary: theme.primary, colorText: theme.secondary },
+        variables: {
+          colorPrimary: theme.primary,
+          colorText: theme.secondary,
+          colorAlphaShade: theme.secondary,
+        },
       }}
     >
       <html lang="pl">

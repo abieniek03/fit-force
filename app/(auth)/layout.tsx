@@ -1,4 +1,4 @@
-import { ILayout } from "../_types/types";
+import { ILayout } from "@/app/_types/types";
 
 export default function AuthLayout({ children }: Readonly<ILayout>) {
   return (
