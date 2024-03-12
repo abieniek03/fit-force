@@ -1,13 +1,18 @@
 import { Metadata } from "next/types";
+import { currentUser } from "@clerk/nextjs";
+
+import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 
 export const metadata: Metadata = {
   title: "Dashboard",
 };
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const user = await currentUser();
+
   return (
-    <main>
-      <h1>Hello from DASHBOARD!👋</h1>
-    </main>
+    <>
+      <DashboardPageTitle>Cześć {user?.firstName}!👋</DashboardPageTitle>
+    </>
   );
 }

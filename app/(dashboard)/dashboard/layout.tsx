@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }: Readonly<ILayout>) {
       <div className="absolute right-4 top-4">
         <UserButton afterSignOutUrl="/" />
       </div>
-      {children}
+      <main className="p-4">{children}</main>
     </>
   );
 }
