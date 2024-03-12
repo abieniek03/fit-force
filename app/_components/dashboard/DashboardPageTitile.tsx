@@ -6,7 +6,7 @@ interface Props {
 
 export default function DashboardPageTitle({ children }: Props) {
   return (
-    <h1 className="text-3xl font-bold text-secondary md:text-4xl lg:text-5xl">
+    <h1 className="text-3xl font-bold text-secondary lg:text-4xl ">
       {children}
     </h1>
   );
