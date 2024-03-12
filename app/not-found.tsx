@@ -1,23 +1,21 @@
 import Image from "next/image";
+import Link from "next/link";
 import icon from "@/app/_assets/images/logo-icon.svg";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="text-center">
-        <div className="mb-10 flex items-center justify-center">
-          <Image src={icon} alt="FitForce" height={100} className="mr-5" />
-          <h1 className="text-8xl font-bold text-primary">404</h1>
+    <div className="flex h-screen flex-col items-center justify-center">
+      <div className="text-center text-secondary">
+        <div className="mb-2 flex items-center justify-center lg:mb-4">
+          <Image src={icon} alt="FitForce" height={100} />
+          <h1 className="text-8xl font-bold">404</h1>
         </div>
-        <h2 className="mb-20 text-xl text-secondary">
+        <p className="mb-8 text-xl font-bold text-primary md:text-2xl lg:text-3xl">
           Nie znaleziono takiej strony...
-        </h2>
-        <a
-          href="/"
-          className="cursor-pointer text-lg text-primary hover:underline"
-        >
+        </p>
+        <Link href="/" className="underline lg:text-lg">
           Powrót do strony głównej
-        </a>
+        </Link>
       </div>
     </div>
   );
