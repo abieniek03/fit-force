@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import icon from "@/app/_assets/images/logo-icon.svg";
 
 export default function NotFound() {

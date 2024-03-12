@@ -1,5 +1,5 @@
-import { SignUp } from "@clerk/nextjs";
 import { Metadata } from "next/types";
+import { SignUp } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Rejestracja",

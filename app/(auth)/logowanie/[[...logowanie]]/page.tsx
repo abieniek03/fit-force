@@ -1,5 +1,5 @@
-import { SignIn } from "@clerk/nextjs";
 import { Metadata } from "next/types";
+import { SignIn } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Logowanie",
