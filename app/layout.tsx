@@ -9,7 +9,10 @@ import { plPL } from "@clerk/localizations";
 const font = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "FitForce",
+  title: {
+    template: "%s - FitForce",
+    default: "FitForce",
+  },
   description: "Aplikacja FitForce - tworzona w ramach projektu studenckiego.",
 };
 
