@@ -1,5 +1,5 @@
-import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 import { Metadata } from "next";
+import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 
 export const metadata: Metadata = {
   title: "Moje dane",
