@@ -1,6 +1,6 @@
 import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 import { Metadata } from "next";
-import Form from "@/app/_components/dashboard/moje-dane/Form";
+import Form from "@/app/_components/dashboard/my-parameters/BmiForm";
 
 export const metadata: Metadata = {
   title: "Moje dane",
