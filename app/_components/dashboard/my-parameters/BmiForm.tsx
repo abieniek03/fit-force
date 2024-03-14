@@ -1,66 +1,62 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type Inputs = {
-  weight: number;
+import { FormField } from "../../form/FormField";
+import { Button } from "../../Button";
+interface IFormFields {
   height: number;
-};
+  weight: number;
+}
 
 export function BmiForm() {
-  const { register, handleSubmit, watch } = useForm<Inputs>();
+  const [bmiValue, setBmiValue] = useState<number>();
 
-  const calculateBMI = (weight: number, height: number) => {
-    if (weight && height) {
-      const bmi = weight / ((height / 100) * (height / 100));
-      return bmi.toFixed(2);
-    }
-    return "";
-  };
+  const bmiFormSchema = z.object({
+    height: z.string({ required_error: "Wymagane" }),
+    weight: z.string({ required_error: "Wymagane" }),
+  });
 
-  const onSubmit = (data: Inputs) => {
-    console.log(data);
+  const bmiForm = useForm<IFormFields>({
+    resolver: zodResolver(bmiFormSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+  });
+
+  const calculateBmi = (data: IFormFields) => {
+    const height = Number(data.height);
+    const weight = Number(data.weight);
+
+    const bmi = weight / ((height / 100) * (height / 100));
+    setBmiValue(Number(bmi.toFixed(2)));
   };
 
   return (
-    <form
-      className="rounded-md border border-gray-300 p-4"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="flex items-center">
-        <input
-          {...register("weight")}
-          type="number"
-          placeholder="Weight (kg)"
-          className="w-full rounded-md border border-primary px-4 py-2 focus:outline-none focus:ring-1 focus:ring-content"
-        />
-      </div>
-      <div className="mt-4 flex items-center">
-        <input
-          {...register("height")}
-          type="number"
-          placeholder="Height (cm)"
-          className="w-full rounded-md border border-primary px-4 py-2 focus:outline-none focus:ring-1 focus:ring-content"
-        />
-      </div>
+    <div className="my-8">
+      <FormProvider {...bmiForm}>
+        <form onSubmit={bmiForm.handleSubmit(calculateBmi)}>
+          <FormField
+            id="height"
+            label="Wzrost"
+            type="number"
+            minValue={120}
+            maxValue={230}
+          />
+          <FormField
+            id="weight"
+            label="Waga"
+            type="number"
+            minValue={30}
+            maxValue={250}
+          />
+          <Button styleType="primary">Oblicz BMI</Button>
+        </form>
+      </FormProvider>
 
-      <button
-        type="submit"
-        className="mt-4 rounded-md bg-primary px-4 py-2 text-white hover:bg-content"
-      >
-        Calculate BMI
-      </button>
-
-      {watch("weight") && watch("height") && (
-        <div className="mt-4">
-          <p>Weight: {watch("weight")} kg</p>
-          <p>Height: {watch("height")} cm</p>
-          <p>
-            BMI:{" "}
-            {calculateBMI(Number(watch("weight")), Number(watch("height")))}
-          </p>
-        </div>
-      )}
-    </form>
+      {bmiValue && <p className="mt-4">Wartoś bmi: {bmiValue}</p>}
+    </div>
   );
 }

@@ -13,6 +13,7 @@ const config: Config = {
         secondary: "#2b2d42",
         accent: "#fff",
         content: "#1e1e1e",
+        error: "#b91c1c",
       },
     },
   },
