@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "@/app/utils/axiosInstance";
 
 import { FormField } from "../../form/FormField";
 import { Button } from "../../Button";
@@ -34,6 +36,21 @@ export function BmiForm() {
     setBmiValue(Number(bmi.toFixed(2)));
   };
 
+  const getUserParameters = async () => {
+    const response = await axiosInstance.get("/my-parameters");
+    return response.data;
+  };
+
+  const { isLoading, isError, data, refetch } = useQuery({
+    queryKey: ["my-parameters"],
+    queryFn: getUserParameters,
+  });
+
+  useEffect(() => {
+    getUserParameters();
+    console.log({ data });
+  }, []);
+
   return (
     <div className="my-8">
       <FormProvider {...bmiForm}>
@@ -52,7 +69,7 @@ export function BmiForm() {
             minValue={30}
             maxValue={250}
           />
-          <Button styleType="primary">Oblicz BMI</Button>
+          <Button styleType="primary">Zapisz</Button>
         </form>
       </FormProvider>
 
