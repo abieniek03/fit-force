@@ -5,8 +5,8 @@ import { UserButton } from "@clerk/nextjs";
 
 export default function DashboardNavbar() {
   return (
-    <nav className="sticky top-0 mx-auto flex max-w-7xl items-center justify-between p-3 lg:relative xl:py-5">
-      <Link href="/">
+    <nav className="sticky top-0 z-20 mx-auto flex max-w-7xl items-center justify-between bg-white p-4 lg:relative">
+      <Link href="/dashboard">
         <Image src={logoPrimary} alt="FitForce" width={150} height={100} />
       </Link>
       <UserButton />
