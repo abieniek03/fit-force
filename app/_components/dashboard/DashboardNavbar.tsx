@@ -9,7 +9,7 @@ export default function DashboardNavbar() {
       <Link href="/dashboard">
         <Image src={logoPrimary} alt="FitForce" width={150} height={100} />
       </Link>
-      <UserButton />
+      <UserButton afterSignOutUrl="/" />
     </nav>
   );
 }
