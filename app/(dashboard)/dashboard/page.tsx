@@ -26,7 +26,7 @@ const menuItems: IMenuItem[] = [
   {
     title: "Moje postępy",
     image: imageMyProgress,
-    path: "moje-postępy",
+    path: "moje-postepy",
   },
   {
     title: "Atlas ćwiczeń",
@@ -36,7 +36,7 @@ const menuItems: IMenuItem[] = [
   {
     title: "Moje dane",
     image: imageMyParameters,
-    path: "moje-parametry",
+    path: "moje-dane",
   },
 ];
 
@@ -54,7 +54,10 @@ export default async function DashboardPage() {
   return (
     <>
       <header>
-        <DashboardPageTitle>Cześć {user?.firstName}!👋</DashboardPageTitle>
+        <h1 className="text-3xl font-bold text-secondary lg:text-4xl">
+          Cześć {user?.firstName}!👋
+        </h1>
+
         <span>{getCurrentDate()}</span>
       </header>
       <div>

@@ -6,7 +6,7 @@ import { ILayout } from "@/app/_types/types";
 import { ClerkProvider } from "@clerk/nextjs";
 import { plPL } from "@clerk/localizations";
 
-const font = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
+const font = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
 export const metadata: Metadata = {
   title: {
