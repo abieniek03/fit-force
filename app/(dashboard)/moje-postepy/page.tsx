@@ -1,12 +1,49 @@
 import { Metadata } from "next/types";
 import Link from "next/link";
+import { cookies } from "next/headers";
+import axios from "axios";
+
 import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
+import MyProgressNotExist from "@/app/_components/dashboard/my-progress/MyProgressNotExist";
 
 export const metadata: Metadata = {
   title: "Moje postępy",
 };
 
-export default function DashboardPage() {
+interface IResponseData {
+  data: {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    title: string;
+    startDate: Date;
+    endDate: Date;
+  };
+}
+
+export default async function MyProgressPage() {
+  const sessionToken = cookies().get("__session")?.value;
+
+  const getApiData = async () => {
+    try {
+      const response = await axios.get(
+        "https://fit-force-backend-git-feature-my-progress-abieniek03.vercel.app/training-camp?latest=true",
+        {
+          headers: {
+            Authorization: `Bearer ${sessionToken}`,
+          },
+        },
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
+
+  const { data }: IResponseData = await getApiData();
+
+  if (!data.id) return <MyProgressNotExist />;
+
   return (
     <>
       <DashboardPageTitle>Moje postępy</DashboardPageTitle>
@@ -14,10 +51,8 @@ export default function DashboardPage() {
       <div className="mt-6 border-b text-secondary lg:mt-12 lg:flex lg:justify-between">
         <div className="mb-2 pb-2">
           <p className="mb-2 text-lg">Obecny okres treningowy</p>
-          <p className="mb-1.5 text-2xl font-bold md:text-3xl">
-            Przygotowanie do walki MMA
-          </p>
-          <p className="font-semibold">Tydzień 2</p>
+          <p className="mb-1.5 text-2xl font-bold md:text-3xl">{data.title}</p>
+          <p className="font-semibold">{data.id}</p>
         </div>
         <div className="mb-4">
           <Link

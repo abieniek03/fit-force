@@ -35,7 +35,9 @@ export default function RootLayout({ children }: Readonly<ILayout>) {
       }}
     >
       <html lang="pl">
-        <body className={`${font.className} text-content`}>{children}</body>
+        <body className={`${font.className} text-content accent-primary`}>
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
