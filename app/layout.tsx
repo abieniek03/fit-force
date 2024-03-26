@@ -5,6 +5,7 @@ import { ILayout } from "@/app/_types/types";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { plPL } from "@clerk/localizations";
+import Providers from "./_hoc/Providers";
 
 const font = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
@@ -36,7 +37,7 @@ export default function RootLayout({ children }: Readonly<ILayout>) {
     >
       <html lang="pl">
         <body className={`${font.className} text-content accent-primary`}>
-          {children}
+          <Providers>{children}</Providers>
         </body>
       </html>
     </ClerkProvider>

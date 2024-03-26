@@ -14,6 +14,7 @@ const config: Config = {
         accent: "#fff",
         background: "#fff",
         content: "#1e1e1e",
+        error: "#b91c1c",
       },
     },
   },

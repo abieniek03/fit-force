@@ -1,4 +1,4 @@
-import { Dialog } from "../../Dialog";
+import AddTrainingCamp from "./AddTrainingCamp";
 
 export default function MyProgressNotExist() {
   return (
@@ -6,9 +6,7 @@ export default function MyProgressNotExist() {
       <p className="text-center text-3xl font-semibold leading-10 text-primary sm:text-4xl md:text-5xl lg:text-6xl">
         Nie masz jeszcze żadnego okresu treningowego
       </p>
-      <Dialog triggerLabel="Dodaj" title="Dodaj okres treningowy">
-        <p>Siema, tutaj formularz będzie</p>
-      </Dialog>
+      <AddTrainingCamp />
     </div>
   );
 }

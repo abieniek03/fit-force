@@ -1,7 +1,7 @@
 import { Metadata } from "next/types";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import axios from "axios";
+import axios from "@/app/_utils/axios/axiosInstance";
 
 import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 import MyProgressNotExist from "@/app/_components/dashboard/my-progress/MyProgressNotExist";
@@ -24,23 +24,19 @@ interface IResponseData {
 export default async function MyProgressPage() {
   const sessionToken = cookies().get("__session")?.value;
 
-  const getApiData = async () => {
+  const getData = async () => {
     try {
-      const response = await axios.get(
-        "https://fit-force-backend-git-feature-my-progress-abieniek03.vercel.app/training-camp?latest=true",
-        {
-          headers: {
-            Authorization: `Bearer ${sessionToken}`,
-          },
+      const response = await axios.get("/training-camp?latest=true", {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
         },
-      );
+      });
       return response.data;
     } catch (error) {
       console.error("Error: ", error);
     }
   };
-
-  const { data }: IResponseData = await getApiData();
+  const { data }: IResponseData = await getData();
 
   if (!data.id) return <MyProgressNotExist />;
 
