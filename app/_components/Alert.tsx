@@ -10,7 +10,7 @@ const successColor = "bg-green-100 text-green-700 border-green-700";
 const errorColor = "bg-red-100 text-red-700 border-red-700";
 const loadingColor = "bg-gray-100 text-gray-500 border-gray-500";
 
-export default function Alert({ type, children }: Readonly<Props>) {
+export function Alert({ type, children }: Readonly<Props>) {
   return (
     <div
       className={clsx(

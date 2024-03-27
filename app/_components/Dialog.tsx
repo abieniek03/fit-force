@@ -10,7 +10,7 @@ interface Props {
   children: JSX.Element;
 }
 
-export function Dialog({ triggerLabel, title, children }: Props) {
+export function Dialog({ triggerLabel, title, children }: Readonly<Props>) {
   return (
     <>
       <RadixDialog.Root>
@@ -21,7 +21,7 @@ export function Dialog({ triggerLabel, title, children }: Props) {
         </RadixDialog.Trigger>
         <RadixDialog.Portal>
           <RadixDialog.Overlay className="fixed inset-0 left-0 top-0 z-20 bg-black/75" />
-          <RadixDialog.Content className="bg-background fixed left-1/2 top-1/2 z-20 w-[93vw] max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-lg p-4 lg:p-8">
+          <RadixDialog.Content className="fixed left-1/2 top-1/2 z-20 w-[93vw] max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-lg bg-background p-4 lg:p-8">
             <div className="mb-4 flex items-center justify-between border-b pb-4">
               <RadixDialog.Title className="text-2xl font-bold text-secondary">
                 {title}
