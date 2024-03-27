@@ -1,45 +1,24 @@
 import { Metadata } from "next/types";
 import Link from "next/link";
-import { cookies } from "next/headers";
-import { differenceInWeeks, isAfter, isBefore } from "date-fns";
 
 import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 import { IServerComponentProps } from "@/app/_types/types";
+import {
+  fetchTrainingCampData,
+  IResponseData as ITrainingCampData,
+} from "@/app/_utils/fetch/fetchTrainingCampData";
 
-import axios from "@/app/_utils/axios/axiosInstance";
+import { differenceInWeeks, isAfter, isBefore } from "date-fns";
 import { differenceInDays } from "date-fns/differenceInDays";
 
 export const metadata: Metadata = {
   title: "Moje postępy",
 };
 
-interface IResponseData {
-  data: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    title: string;
-    startDate: Date;
-    endDate: Date;
-  };
-}
-
 export default async function MyProgressPage(request: IServerComponentProps) {
-  const sessionToken = cookies().get("__session")?.value;
-
-  const getData = async () => {
-    try {
-      const response = await axios.get(`/training-camp/${request.params.id}`, {
-        headers: {
-          Authorization: `Bearer ${sessionToken}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error("Error: ", error);
-    }
-  };
-  const { data }: IResponseData = await getData();
+  const { data }: ITrainingCampData = await fetchTrainingCampData(
+    `/${request.params.id}`,
+  );
 
   const isCurrent =
     new Date() >= new Date(data.startDate) &&
