@@ -11,8 +11,8 @@ import { FormField } from "../../form/FormField";
 import { Button } from "../../Button";
 
 import axios from "@/app/_utils/axios/axiosInstance";
-import { addTrainingCampSchema } from "@/app/_utils/validation/my-progress/add-training-camp/add-training-camp.schema";
 import { getSessionToken } from "../../../_utils/helpers/getSessionToken";
+import { addTrainingCampSchema } from "@/app/_utils/validation/my-progress/add-training-camp/add-training-camp.schema";
 import { IAddTrainingCampForm } from "../../../_utils/validation/my-progress/add-training-camp/add-training-camp.types";
 
 export default function AddTrainingCamp() {
@@ -24,13 +24,18 @@ export default function AddTrainingCamp() {
 
   const sessionToken = getSessionToken();
 
-  const handleApi = async (data: IAddTrainingCampForm) => {
-    const response = await axios.post("/training-camp", data, {
-      headers: {
-        Authorization: `Bearer ${sessionToken}`,
-      },
-    });
-    return response.data;
+  const createTrainingCamp = async (data: IAddTrainingCampForm) => {
+    try {
+      const response = await axios.post("/training-camp", data, {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      });
+
+      return response.data;
+    } catch (error: any) {
+      return error.data;
+    }
   };
 
   const sendForm = (data: IAddTrainingCampForm) => {
@@ -49,7 +54,7 @@ export default function AddTrainingCamp() {
 
   const { mutate, isPending, isError, isSuccess } = useMutation({
     mutationKey: ["addTrainingCamp"],
-    mutationFn: handleApi,
+    mutationFn: createTrainingCamp,
   });
 
   useEffect(() => {
@@ -59,25 +64,24 @@ export default function AddTrainingCamp() {
   return (
     <Dialog
       triggerLabel="Dodaj okres treinigowy"
+      triggerType="primary"
       title="Dodaj okres treningowy"
     >
-      <>
-        <FormProvider {...addTrainingCampForm}>
-          <form onSubmit={addTrainingCampForm.handleSubmit(sendForm)}>
-            {isError && (
-              <Alert type="error">
-                Nie udało się utworzyć okresu treningowego.
-              </Alert>
-            )}
-            <FormField id="title" label="Nazwa" type="string" />
-            <FormField id="startDate" type="date" label="Data rozpoczęcia" />
-            <FormField id="endDate" type="date" label="Data zakończenia" />
-            <Button styleType="primary" wFull={true} loading={isPending}>
-              Wyślij
-            </Button>
-          </form>
-        </FormProvider>
-      </>
+      <FormProvider {...addTrainingCampForm}>
+        <form onSubmit={addTrainingCampForm.handleSubmit(sendForm)}>
+          {isError && (
+            <Alert type="error">
+              Nie udało się utworzyć okresu treningowego.
+            </Alert>
+          )}
+          <FormField id="title" label="Nazwa" />
+          <FormField id="startDate" type="date" label="Data rozpoczęcia" />
+          <FormField id="endDate" type="date" label="Data zakończenia" />
+          <Button styleType="primary" wFull={true} loading={isPending}>
+            Wyślij
+          </Button>
+        </form>
+      </FormProvider>
     </Dialog>
   );
 }

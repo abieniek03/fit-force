@@ -11,6 +11,7 @@ import {
 
 import { differenceInWeeks, isAfter, isBefore } from "date-fns";
 import { differenceInDays } from "date-fns/differenceInDays";
+import EditTrainingCamp from "@/app/_components/dashboard/my-progress/EditTrainingCamp";
 
 export const metadata: Metadata = {
   title: "Moje postępy",
@@ -42,9 +43,12 @@ export default async function MyProgressPage(request: IServerComponentProps) {
       <div className="mt-6 border-b text-secondary lg:mt-12 lg:flex lg:justify-between">
         <div className="mb-2 pb-2">
           <p className="mb-2 text-lg">Obecny okres treningowy</p>
-          <p className="mb-1.5 text-2xl font-bold uppercase md:text-3xl">
-            {data.title}
-          </p>
+          <div className="mb-1.5 flex gap-2">
+            <p className="text-2xl font-bold uppercase md:text-3xl">
+              {data.title}
+            </p>
+            <EditTrainingCamp />
+          </div>
 
           <div className="flex">
             <span className="text-sm font-semibold uppercase text-primary md:text-base">

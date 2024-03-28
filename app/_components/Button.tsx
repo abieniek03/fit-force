@@ -46,7 +46,7 @@ export function Button({
       disabled={loading}
       {...rest}
     >
-      {loading && (
+      {loading ? (
         <svg
           aria-hidden="true"
           role="status"
@@ -64,8 +64,9 @@ export function Button({
             fill="currentColor"
           />
         </svg>
+      ) : (
+        children
       )}
-      {children}
     </button>
   );
 }

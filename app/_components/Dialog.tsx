@@ -1,23 +1,36 @@
 "use client";
 
 import * as RadixDialog from "@radix-ui/react-dialog";
-import { Button } from "./Button";
+import clsx from "clsx";
+
 import { MdClose } from "react-icons/md";
 
 interface Props {
-  triggerLabel: string;
+  triggerLabel: string | JSX.Element;
+  triggerType: "primary" | "accent";
   title: string;
   children: JSX.Element;
 }
 
-export function Dialog({ triggerLabel, title, children }: Readonly<Props>) {
+export function Dialog({
+  triggerLabel,
+  triggerType,
+  title,
+  children,
+}: Readonly<Props>) {
   return (
     <>
       <RadixDialog.Root>
-        <RadixDialog.Trigger className="mt-8 flex w-full items-center justify-center">
-          <Button styleType="primary" size="xl">
+        <RadixDialog.Trigger asChild>
+          <button
+            className={clsx(
+              triggerType === "primary" &&
+                "rounded-lg bg-primary px-4 py-2 text-accent",
+              triggerType === "accent" && "text-primary md:p-1",
+            )}
+          >
             {triggerLabel}
-          </Button>
+          </button>
         </RadixDialog.Trigger>
         <RadixDialog.Portal>
           <RadixDialog.Overlay className="fixed inset-0 left-0 top-0 z-20 bg-black/75" />

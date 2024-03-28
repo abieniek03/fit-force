@@ -21,6 +21,7 @@ export function FormField({
     control,
     formState: { errors },
   } = useFormContext();
+
   const { field } = useController({
     control,
     name: id,
@@ -38,13 +39,13 @@ export function FormField({
         className={clsx(
           "w-full rounded-lg border px-4 py-2 focus:outline-primary",
           errors[id]?.message &&
-            "outline-error outline outline-1 focus:outline-2 focus:outline-primary",
+            "outline outline-1 outline-error focus:outline-2 focus:outline-primary",
         )}
         value={field.value}
         onChange={field.onChange}
       />
       {errors[id] && (
-        <p className="text-error mt-1 text-xs">
+        <p className="mt-1 text-xs text-error">
           {errors[id]?.message?.toString()}
         </p>
       )}
