@@ -85,6 +85,28 @@ export default function EditTrainingCamp() {
     mutationFn: editTrainingCamp,
   });
 
+  const deleteCamp = async () => {
+    const deleteAccept = window.confirm(
+      "Czy na pewno chcesz usunąć okres treningowy?",
+    );
+
+    if (!deleteAccept) return null;
+
+    try {
+      await axios.delete(`/training-camp/${id}`, {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      });
+
+      window.location.reload();
+    } catch {
+      window.alert(
+        "Nie udało się usunąć okresu treningowego. Spróbuj ponownie!",
+      );
+    }
+  };
+
   useEffect(() => {
     edit.isSuccess && window.location.reload();
   }, [edit.isSuccess]);
@@ -112,53 +134,60 @@ export default function EditTrainingCamp() {
       triggerType="accent"
       title="Edytuj okres treningowy"
     >
-      <FormProvider {...editTrainingCampForm}>
-        <form onSubmit={editTrainingCampForm.handleSubmit(sendForm)}>
-          {edit.isError && (
-            <Alert type="error">
-              Edycja się nie powiodła. Sprawdź wprowadzone dane.
-            </Alert>
-          )}
-
-          <Controller
-            name="title"
-            control={editTrainingCampForm.control}
-            render={({ field }) => (
-              <FormField {...field} id="title" label="Nazwa" />
+      <>
+        <FormProvider {...editTrainingCampForm}>
+          <form onSubmit={editTrainingCampForm.handleSubmit(sendForm)}>
+            {edit.isError && (
+              <Alert type="error">
+                Edycja się nie powiodła. Sprawdź wprowadzone dane.
+              </Alert>
             )}
-          />
 
-          <Controller
-            name="startDate"
-            control={editTrainingCampForm.control}
-            render={({ field }) => (
-              <FormField
-                {...field}
-                id="startDate"
-                type="date"
-                label="Data rozpoczęcia"
-              />
-            )}
-          />
+            <Controller
+              name="title"
+              control={editTrainingCampForm.control}
+              render={({ field }) => (
+                <FormField {...field} id="title" label="Nazwa" />
+              )}
+            />
 
-          <Controller
-            name="endDate"
-            control={editTrainingCampForm.control}
-            render={({ field }) => (
-              <FormField
-                {...field}
-                id="endDate"
-                type="date"
-                label="Data zakończenia"
-              />
-            )}
-          />
+            <Controller
+              name="startDate"
+              control={editTrainingCampForm.control}
+              render={({ field }) => (
+                <FormField
+                  {...field}
+                  id="startDate"
+                  type="date"
+                  label="Data rozpoczęcia"
+                />
+              )}
+            />
 
-          <Button styleType="primary" wFull={true} loading={edit.isPending}>
-            Zatwierdź
-          </Button>
-        </form>
-      </FormProvider>
+            <Controller
+              name="endDate"
+              control={editTrainingCampForm.control}
+              render={({ field }) => (
+                <FormField
+                  {...field}
+                  id="endDate"
+                  type="date"
+                  label="Data zakończenia"
+                />
+              )}
+            />
+
+            <Button styleType="primary" wFull={true} loading={edit.isPending}>
+              Zatwierdź
+            </Button>
+          </form>
+          <div className="mt-2">
+            <Button styleType="secondary" wFull={true} onClick={deleteCamp}>
+              Usuń okres treningowy
+            </Button>
+          </div>
+        </FormProvider>
+      </>
     </Dialog>
   );
 }
