@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
 import clsx from "clsx";
 
+type AlertType = "success" | "error" | "loading";
+
 interface Props {
-  type: string;
+  type: AlertType;
   children: ReactNode;
 }
 

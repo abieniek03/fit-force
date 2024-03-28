@@ -22,7 +22,7 @@ export const fetchTrainingCampData = async (endpoint: string) => {
       },
     });
     return response.data;
-  } catch (error) {
-    console.error("Error: ", error);
+  } catch (error: any) {
+    return error.response.data;
   }
 };

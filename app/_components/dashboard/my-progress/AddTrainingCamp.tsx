@@ -34,14 +34,17 @@ export default function AddTrainingCamp() {
   };
 
   const sendForm = (data: IAddTrainingCampForm) => {
-    console.log(data);
-    const dto = {
-      title: data.title,
-      startDate: new Date(data.startDate).toISOString(),
-      endDate: new Date(data.endDate).toISOString(),
-    };
+    try {
+      const dto = {
+        title: data.title,
+        startDate: new Date(data.startDate).toISOString(),
+        endDate: new Date(data.endDate).toISOString(),
+      };
 
-    mutate(dto);
+      mutate(dto);
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   const { mutate, isPending, isError, isSuccess } = useMutation({
@@ -61,7 +64,11 @@ export default function AddTrainingCamp() {
       <>
         <FormProvider {...addTrainingCampForm}>
           <form onSubmit={addTrainingCampForm.handleSubmit(sendForm)}>
-            {isError && <Alert type="error">coś</Alert>}
+            {isError && (
+              <Alert type="error">
+                Nie udało się utworzyć okresu treningowego.
+              </Alert>
+            )}
             <FormField id="title" label="Nazwa" type="string" />
             <FormField id="startDate" type="date" label="Data rozpoczęcia" />
             <FormField id="endDate" type="date" label="Data zakończenia" />

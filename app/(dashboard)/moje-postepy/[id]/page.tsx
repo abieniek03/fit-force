@@ -1,5 +1,6 @@
 import { Metadata } from "next/types";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 import { IServerComponentProps } from "@/app/_types/types";
@@ -19,6 +20,8 @@ export default async function MyProgressPage(request: IServerComponentProps) {
   const { data }: ITrainingCampData = await fetchTrainingCampData(
     `/${request.params.id}`,
   );
+
+  if (data === undefined) redirect("/moje-postepy");
 
   const isCurrent =
     new Date() >= new Date(data.startDate) &&
