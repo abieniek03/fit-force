@@ -22,6 +22,7 @@ export default function DashboardMenu() {
   const menuItems: IMenuItems[] = [
     { id: "dashboard", path: "/dashboard", label: "Dashboard" },
     { id: "moje-dane", path: "/moje-dane", label: "Moje dane" },
+    { id: "atlas-cwiczen", path: "/atlas-cwiczen", label: "Atlas ćwiczeń" },
   ];
 
   return (
@@ -37,7 +38,7 @@ export default function DashboardMenu() {
       <nav
         className={clsx(
           isOpen ? "left-0" : "-left-full",
-          "absolute top-0 h-screen w-full bg-primary transition-all duration-500 lg:sticky lg:left-0 lg:top-0 lg:block lg:w-[260px] lg:rounded-e-xl lg:transition-none",
+          "absolute z-50 top-0 h-screen w-full bg-primary transition-all duration-500 lg:sticky lg:left-0 lg:top-0 lg:block lg:w-[260px] lg:rounded-e-xl lg:transition-none",
         )}
       >
         <div className="flex items-center justify-between">
