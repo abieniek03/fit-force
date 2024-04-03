@@ -1,3 +1,4 @@
+import Link from "next/link";
 import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 import {
   fetchTrainingCampData,
@@ -5,7 +6,6 @@ import {
 } from "@/app/_utils/fetch/fetchTrainingCampData";
 import { format } from "date-fns";
 import { pl } from "date-fns/locale";
-import Link from "next/link";
 
 export default async function AllTrainingCamps() {
   const { data } = await fetchTrainingCampData(`/`);
