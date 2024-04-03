@@ -1,11 +1,7 @@
-'use client'
-import React from "react";
-import { IServerComponentProps } from "@/app/_types/types";
-import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
 import Image from "next/image";
-import { useState } from "react";
+import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
+import { IServerComponentProps } from "@/app/_types/types";
 
-// Sample exercise data
 const exercises = [
   {
     title: "Przysiad ze sztangą",
@@ -93,27 +89,25 @@ const exercises = [
 ];
 
 export default function ExercisePage({ params }: IServerComponentProps) {
-  const { slug } = params;
-  const muscleName = slug as string;
-  const [searchTerm, setSearchTerm] = useState("");
-  // Filter exercises by muscle group
+  const { id } = params;
+  const muscleName = id;
+
   const filteredExercises = exercises.filter(
     (exercise) => exercise.group.toLowerCase() === muscleName.toLowerCase(),
   );
 
+  if (filteredExercises.length === 0)
+    return (
+      <p className="text-center text-secondary">
+        Brak dostępnych ćwiczeń dla tej partii mięśniowej.
+      </p>
+    );
+
   return (
-    
-    <div className="mt-2  max-w-screen-3xl mx-auto  rounded-md bg-accent p-4 text-center">
+    <div className="max-w-screen-3xl  mx-auto mt-2  rounded-md bg-accent p-4 text-center">
       <div className="mb-24 text-center">
-       <DashboardPageTitle>{muscleName}</DashboardPageTitle>
+        <DashboardPageTitle>{muscleName}</DashboardPageTitle>
       </div>
-      <input
-          type="text"
-          placeholder="Znajdź ćwiczenie..."
-          className="mb-11 w-full rounded-md border border-secondary px-4 py-2 focus:outline-none focus:ring-1 focus:ring-secondary"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
       <div className="grid gap-16">
         {filteredExercises.map((exercise, index) => (
           <div
@@ -135,11 +129,6 @@ export default function ExercisePage({ params }: IServerComponentProps) {
             </div>
           </div>
         ))}
-        {filteredExercises.length === 0 && (
-          <p className="text-center text-secondary">
-            Brak dostępnych ćwiczeń dla tej partii mięśniowej.
-          </p>
-        )}
       </div>
     </div>
   );
