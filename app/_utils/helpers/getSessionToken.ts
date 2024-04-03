@@ -1,3 +1,6 @@
+"use client";
+import "client-only";
+
 export const getSessionToken = () => {
   const cookies = document.cookie.split(";");
   for (let cookie of cookies) {

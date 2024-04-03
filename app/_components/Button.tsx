@@ -25,7 +25,7 @@ export function Button({
 }: Readonly<ComponentProps<"button"> & Props>) {
   const buttonStyles = clsx(
     "rounded-lg px-4 py-2  text-accent transition-all duration-200 outline-primary",
-    styleType ? `bg-${styleType}` : "",
+    styleType ? `bg-${styleType}` : "bg-secondary",
     size ? `text-${size}` : "",
     wFull ? "w-full" : "",
     loading ? "bg-opacity-50" : "hover:bg-opacity-85",

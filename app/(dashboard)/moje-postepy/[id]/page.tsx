@@ -68,7 +68,7 @@ export default async function MyProgressPage(request: IServerComponentProps) {
         </div>
         <div className="mb-4">
           <Link
-            href="/moje-postepy/okresy-treningowe/user-id"
+            href="/okresy-treningowe"
             className="mb-3 font-semibold text-primary hover:underline"
           >
             Zobacz poprzednie

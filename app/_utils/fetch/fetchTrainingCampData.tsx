@@ -1,15 +1,17 @@
 import { cookies } from "next/headers";
 import axios from "@/app/_utils/axios/axiosInstance";
 
+export interface ITrainingCampElement {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  title: string;
+  startDate: Date;
+  endDate: Date;
+}
+
 export interface IResponseData {
-  data: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    title: string;
-    startDate: Date;
-    endDate: Date;
-  };
+  data: ITrainingCampElement;
 }
 
 export const fetchTrainingCampData = async (endpoint: string) => {
