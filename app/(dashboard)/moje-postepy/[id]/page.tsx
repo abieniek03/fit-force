@@ -2,24 +2,22 @@ import { Metadata } from "next/types";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
+import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitile";
+import { EditTrainingCamp } from "@/app/_components/dashboard/my-progress/EditTrainingCamp";
+import { Weights } from "@/app/_components/dashboard/my-progress/Weights";
 import { IServerComponentProps } from "@/app/_types/types";
-import {
-  fetchTrainingCampData,
-  IResponseData as ITrainingCampData,
-} from "@/app/_utils/fetch/fetchTrainingCampData";
+import { fetchData, ITrainingCamp } from "@/app/_utils/fetch/fetchData";
 
 import { differenceInWeeks, isAfter, isBefore } from "date-fns";
 import { differenceInDays } from "date-fns/differenceInDays";
-import EditTrainingCamp from "@/app/_components/dashboard/my-progress/EditTrainingCamp";
 
 export const metadata: Metadata = {
   title: "Moje postępy",
 };
 
 export default async function MyProgressPage(request: IServerComponentProps) {
-  const { data }: ITrainingCampData = await fetchTrainingCampData(
-    `/${request.params.id}`,
+  const { data }: { data: ITrainingCamp } = await fetchData(
+    `/training-camp/${request.params.id}`,
   );
 
   if (data === undefined) redirect("/moje-postepy");
@@ -77,21 +75,8 @@ export default async function MyProgressPage(request: IServerComponentProps) {
       </div>
 
       <div className="flex flex-col gap-4 pt-6 lg:flex-row">
-        <div className="border-r lg:w-1/2 lg:pr-4">
-          <p className="bg-red-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero,
-            distinctio! Tenetur excepturi et tempore quasi magnam dolore harum
-            maxime id, tempora neque veniam nihil facilis ipsam veritatis rem
-            aspernatur esse fugiat. Ratione dignissimos et incidunt quidem,
-            quaerat cupiditate veniam quam.
-          </p>
-          <p className="bg-sky-500">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam
-            quidem ratione amet sint suscipit id corrupti facere neque culpa
-            eos. Expedita, quia accusamus, eveniet quis sed excepturi deserunt
-            unde dicta illum commodi atque in, impedit alias. Dolores deserunt
-            officiis dolorum?
-          </p>
+        <div className="lg:w-1/2 lg:border-r lg:pr-4">
+          <Weights campId={request.params.id} />
         </div>
         <div className="h-full lg:w-1/2">
           <p className="bg-emerald-500">

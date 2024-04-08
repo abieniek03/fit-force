@@ -17,7 +17,7 @@ import { editTrainingCampSchema } from "../../../_utils/validation/my-progress/e
 import { IEditTrainingCampForm } from "@/app/_utils/validation/my-progress/edit-training-camp/edit-training-camp.types";
 import { usePathname } from "next/navigation";
 
-export default function EditTrainingCamp() {
+export function EditTrainingCamp() {
   const pathnmame = usePathname();
   const id = pathnmame.split("/")[2];
 

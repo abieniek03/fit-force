@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import axios from "@/app/_utils/axios/axiosInstance";
 
-export interface ITrainingCampElement {
+export interface ITrainingCamp {
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -10,15 +10,16 @@ export interface ITrainingCampElement {
   endDate: Date;
 }
 
-export interface IResponseData {
-  data: ITrainingCampElement;
+export interface IWeight {
+  date: string;
+  weight: number;
 }
 
-export const fetchTrainingCampData = async (endpoint: string) => {
+export const fetchData = async (endpoint: string) => {
   const sessionToken = cookies().get("__session")?.value;
 
   try {
-    const response = await axios.get(`/training-camp${endpoint}`, {
+    const response = await axios.get(endpoint, {
       headers: {
         Authorization: `Bearer ${sessionToken}`,
       },

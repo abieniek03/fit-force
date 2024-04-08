@@ -1,20 +1,17 @@
 import Link from "next/link";
-import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
-import {
-  fetchTrainingCampData,
-  ITrainingCampElement,
-} from "@/app/_utils/fetch/fetchTrainingCampData";
+import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitile";
+import { fetchData, ITrainingCamp } from "@/app/_utils/fetch/fetchData";
 import { format } from "date-fns";
 import { pl } from "date-fns/locale";
 
 export default async function AllTrainingCamps() {
-  const { data } = await fetchTrainingCampData(`/`);
+  const { data } = await fetchData("/training-camp");
 
   return (
     <>
       <DashboardPageTitle>Wszystkie okresy treningowe</DashboardPageTitle>
       <div className="my-4 flex flex-col gap-y-4 lg:my-8">
-        {data.map((el: ITrainingCampElement, index: number) => (
+        {data.map((el: ITrainingCamp, index: number) => (
           <Link
             href={`/moje-postepy/${el.id}`}
             key={index}

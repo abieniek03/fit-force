@@ -15,7 +15,7 @@ import { getSessionToken } from "../../../_utils/helpers/getSessionToken";
 import { addTrainingCampSchema } from "@/app/_utils/validation/my-progress/add-training-camp/add-training-camp.schema";
 import { IAddTrainingCampForm } from "../../../_utils/validation/my-progress/add-training-camp/add-training-camp.types";
 
-export default function AddTrainingCamp() {
+export  function AddTrainingCamp() {
   const addTrainingCampForm = useForm<IAddTrainingCampForm>({
     resolver: zodResolver(addTrainingCampSchema),
     mode: "onSubmit",

@@ -1,5 +1,5 @@
 import { ILayout } from "@/app/_types/types";
-import DashboardNavbar from "@/app/_components/dashboard/DashboardNavbar";
+import { DashboardNavbar } from "@/app/_components/dashboard/DashboardNavbar";
 
 export default function DashboardLayout({ children }: Readonly<ILayout>) {
   return (

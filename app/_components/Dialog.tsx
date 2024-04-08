@@ -26,7 +26,7 @@ export function Dialog({
             className={clsx(
               triggerType === "primary" &&
                 "rounded-lg bg-primary px-4 py-2 text-accent",
-              triggerType === "accent" && "text-primary md:p-1",
+              triggerType === "accent" && "text-sm text-primary md:p-1",
             )}
           >
             {triggerLabel}
