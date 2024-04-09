@@ -8,6 +8,7 @@ interface Props {
   type?: string;
   minValue?: number;
   maxValue?: number;
+  step?: string;
 }
 
 export function FormField({
@@ -16,6 +17,7 @@ export function FormField({
   type,
   minValue,
   maxValue,
+  step,
 }: Readonly<Props>) {
   const {
     control,
@@ -34,6 +36,7 @@ export function FormField({
       </label>
       <input
         type={type || "text"}
+        step={step}
         min={minValue || 0}
         max={maxValue}
         className={clsx(

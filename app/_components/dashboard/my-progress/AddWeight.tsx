@@ -71,7 +71,13 @@ export function AddWeight() {
         <form onSubmit={addWeightForm.handleSubmit(sendForm)}>
           {isError && <Alert type="error">Nie udało się dodać wagi.</Alert>}
           <FormField id="date" type="date" label="Data" />
-          <FormField id="weight" type="number" label="Waga" />
+          <FormField
+            id="weight"
+            type="number"
+            label="Waga"
+            step="0.1"
+            minValue={30}
+          />
           <Button styleType="primary" wFull={true} loading={isPending}>
             Dodaj
           </Button>

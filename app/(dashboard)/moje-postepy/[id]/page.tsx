@@ -75,7 +75,7 @@ export default async function MyProgressPage(request: IServerComponentProps) {
       </div>
 
       <div className="flex flex-col gap-4 pt-6 lg:flex-row">
-        <div className="lg:w-1/2 lg:border-r lg:pr-4">
+        <div className="lg:w-1/2">
           <LatestWeights campId={request.params.id} />
         </div>
         <div className="h-full lg:w-1/2">
