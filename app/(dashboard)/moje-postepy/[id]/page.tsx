@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitile";
 import { EditTrainingCamp } from "@/app/_components/dashboard/my-progress/EditTrainingCamp";
-import { Weights } from "@/app/_components/dashboard/my-progress/Weights";
+import { LatestWeights } from "@/app/_components/dashboard/my-progress/LatestWeights";
 import { IServerComponentProps } from "@/app/_types/types";
 import { fetchData, ITrainingCamp } from "@/app/_utils/fetch/fetchData";
 
@@ -76,7 +76,7 @@ export default async function MyProgressPage(request: IServerComponentProps) {
 
       <div className="flex flex-col gap-4 pt-6 lg:flex-row">
         <div className="lg:w-1/2 lg:border-r lg:pr-4">
-          <Weights campId={request.params.id} />
+          <LatestWeights campId={request.params.id} />
         </div>
         <div className="h-full lg:w-1/2">
           <p className="bg-emerald-500">

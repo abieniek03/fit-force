@@ -3,13 +3,15 @@ import { fetchData, IWeight } from "@/app/_utils/fetch/fetchData";
 
 import { format } from "date-fns";
 import { CalcDifference } from "./CalcDiffrence";
+import { AllWeights } from "./AllWeights";
 
 interface Props {
   campId: string;
 }
 
-export async function Weights({ campId }: Props) {
-  const { data } = await fetchData(`/weight/camp-id=${campId}`);
+export async function LatestWeights({ campId }: Props) {
+  const { data } = await fetchData(`/weight/camp-id=${campId}?sort=desc`);
+
   return (
     <div className="rounded-md border p-4">
       <div className="mb-4 flex justify-between border-b pb-4">
@@ -18,7 +20,7 @@ export async function Weights({ campId }: Props) {
       </div>
 
       <div>
-        {data.map((el: IWeight, index: number) => (
+        {data.slice(0, 5).map((el: IWeight, index: number) => (
           <div
             className="grid grid-cols-6 px-2 py-1 odd:bg-slate-100"
             key={index}
@@ -36,6 +38,11 @@ export async function Weights({ campId }: Props) {
           </div>
         ))}
       </div>
+      {data.length > 5 && (
+        <div className="flex justify-center pt-4">
+          <AllWeights campId={campId} />
+        </div>
+      )}
     </div>
   );
 }
