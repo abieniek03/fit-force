@@ -10,8 +10,9 @@ import logo from "@/app/_assets/images/logo-secondary.svg";
 import { IoIosClose } from "react-icons/io";
 
 interface IMenuItems {
-  label: string;
+  id: string;
   path: string;
+  label: string;
 }
 
 export default function DashboardMenu() {
@@ -19,8 +20,9 @@ export default function DashboardMenu() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const menuItems: IMenuItems[] = [
-    { label: "Dashboard", path: "dashboard" },
-    { label: "Testowy", path: "testowy" },
+    { id: "dashboard", path: "/dashboard", label: "Dashboard" },
+    { id: "moje-dane", path: "/moje-dane", label: "Moje dane" },
+    { id: "atlas-cwiczen", path: "/atlas-cwiczen", label: "Atlas ćwiczeń" },
   ];
 
   return (
@@ -36,7 +38,7 @@ export default function DashboardMenu() {
       <nav
         className={clsx(
           isOpen ? "left-0" : "-left-full",
-          "absolute top-0 h-screen w-full bg-primary transition-all duration-500 lg:sticky lg:left-0 lg:top-0 lg:block lg:w-[260px] lg:rounded-e-xl lg:transition-none",
+          "absolute top-0 z-50 h-screen w-full bg-primary transition-all duration-500 lg:sticky lg:left-0 lg:top-0 lg:block lg:w-[260px] lg:rounded-e-xl lg:transition-none",
         )}
       >
         <div className="flex items-center justify-between">
@@ -62,7 +64,7 @@ export default function DashboardMenu() {
               key={index}
               className={clsx(
                 "block p-2 pl-6",
-                el.path === pathname.split("/")[1]
+                el.id === pathname.split("/")[1]
                   ? "bg-accent font-bold"
                   : "text-accent",
               )}
