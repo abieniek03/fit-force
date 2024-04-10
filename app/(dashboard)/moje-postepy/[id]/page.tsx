@@ -10,6 +10,7 @@ import { fetchData, ITrainingCamp } from "@/app/_utils/fetch/fetchData";
 
 import { differenceInWeeks, isAfter, isBefore } from "date-fns";
 import { differenceInDays } from "date-fns/differenceInDays";
+import { TrainingPlan } from "@/app/_components/dashboard/my-progress/TrainingPlan";
 
 export const metadata: Metadata = {
   title: "Moje postępy",
@@ -74,25 +75,9 @@ export default async function MyProgressPage(request: IServerComponentProps) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 pt-6 lg:flex-row">
-        <div className="lg:w-1/2">
-          <LatestWeights campId={request.params.id} />
-        </div>
-        <div className="h-full lg:w-1/2">
-          <p className="bg-emerald-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-            veniam ut, unde repellendus harum error? Debitis, qui atque numquam
-            explicabo magni tenetur animi nostrum ducimus modi excepturi
-            voluptates labore unde delectus blanditiis nulla perferendis minima
-            facilis dolor alias iure pariatur cum! Eos sed officiis quidem rem
-            cumque, libero modi deserunt animi. Mollitia repellat unde optio,
-            totam minima corporis nobis amet dolor neque dolore alias qui omnis
-            ipsam dolorem voluptatibus repudiandae possimus quod quo. Optio
-            cupiditate officia voluptas dolore totam. Eveniet error totam vitae
-            nulla culpa magnam ut? At architecto quod, veritatis fugit, tempora
-            autem obcaecati nostrum corrupti deleniti cum doloremque.
-          </p>
-        </div>
+      <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
+        <LatestWeights campId={request.params.id} />
+        <TrainingPlan />
       </div>
     </>
   );
