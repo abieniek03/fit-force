@@ -2,7 +2,7 @@ import { Metadata } from "next/types";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitile";
+import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitle";
 import { EditTrainingCamp } from "@/app/_components/dashboard/my-progress/EditTrainingCamp";
 import { LatestWeights } from "@/app/_components/dashboard/my-progress/LatestWeights";
 import { IServerComponentProps } from "@/app/_types/types";

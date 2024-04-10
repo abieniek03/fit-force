@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitile";
+import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitle";
 import { fetchData, ITrainingCamp } from "@/app/_utils/fetch/fetchData";
 import { format } from "date-fns";
 import { pl } from "date-fns/locale";

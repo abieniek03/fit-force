@@ -2,7 +2,7 @@ import { Metadata } from "next/types";
 import Image from "next/image";
 import { currentUser } from "@clerk/nextjs";
 
-import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitile";
+import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitle";
 
 export const metadata: Metadata = {
   title: "Moje dane",

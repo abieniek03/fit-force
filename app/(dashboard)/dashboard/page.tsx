@@ -6,7 +6,7 @@ import { pl } from "date-fns/locale";
 import Link from "next/link";
 import Image from "next/image";
 
-import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitile";
+import DashboardPageTitle from "@/app/_components/dashboard/DashboardPageTitle";
 
 import imageMyProgress from "@/app/_assets/images/my-progress.jpg";
 import imageExceriesBoook from "@/app/_assets/images/exceries-book.jpg";

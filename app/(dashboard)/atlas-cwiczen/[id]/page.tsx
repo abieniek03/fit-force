@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitile";
+import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitle";
 import { IServerComponentProps } from "@/app/_types/types";
 
 const exercises = [
