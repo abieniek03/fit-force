@@ -32,7 +32,7 @@ export async function LatestWeights({ campId }: Props) {
               <span className="flex items-center justify-end">
                 <CalcDifference
                   weight={Number(el.weight)}
-                  prevWeight={Number(data[index - 1]?.weight)}
+                  prevWeight={Number(data[index + 1]?.weight)}
                 />
               </span>
             </div>
