@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 demo: https://fit-force-students.vercel.app/logowanie
 #### Test login data
 email: test@user.pl \
-password: Haslo.123
+password: P@sswordStrong123
 
 
 First, run the development server:
