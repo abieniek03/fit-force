@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitle";
 import { motion } from "framer-motion";
+
+import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitle";
+
 import { gql } from "graphql-request";
 import { gqlClient } from "@/app/_utils/gql/gqlClient";
 
@@ -15,7 +17,7 @@ interface ITrainingGroup {
   path: string;
 }
 
-export default async function ExerciseBookSection() {
+export default async function TrainingGroupPage() {
   const query = gql`
     {
       allTrainingGroups {
@@ -32,7 +34,9 @@ export default async function ExerciseBookSection() {
 
   return (
     <div className="mt-2 w-full rounded-md bg-accent p-4">
-      <DashboardPageTitle>Atlas Ćwiczeń</DashboardPageTitle>
+      <div className="text-center">
+        <DashboardPageTitle>Atlas Ćwiczeń</DashboardPageTitle>
+      </div>
       <div className="mt-8 grid grid-cols-1 gap-10 lg:mt-16 lg:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5">
         {allTrainingGroups.map((group: ITrainingGroup, index: number) => (
           <motion.div
