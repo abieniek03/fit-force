@@ -42,15 +42,15 @@ export function BmiForm() {
             id="height"
             label="Wzrost"
             type="number"
-            minValue={120}
-            maxValue={230}
+            min={120}
+            max={230}
           />
           <FormField
             id="weight"
             label="Waga"
             type="number"
-            minValue={30}
-            maxValue={250}
+            min={30}
+            max={250}
           />
           <Button styleType="primary">Oblicz BMI</Button>
         </form>
