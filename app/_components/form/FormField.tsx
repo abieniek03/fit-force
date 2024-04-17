@@ -1,24 +1,19 @@
 "use client";
+
+import { type ComponentProps } from "react";
 import clsx from "clsx";
 import { useFormContext, useController } from "react-hook-form";
 
 interface Props {
   id: string;
   label: string;
-  type?: string;
-  minValue?: number;
-  maxValue?: number;
-  step?: string;
 }
 
 export function FormField({
   label,
   id,
-  type,
-  minValue,
-  maxValue,
-  step,
-}: Readonly<Props>) {
+  ...rest
+}: Readonly<ComponentProps<"input"> & Props>) {
   const {
     control,
     formState: { errors },
@@ -35,10 +30,7 @@ export function FormField({
         {label}
       </label>
       <input
-        type={type || "text"}
-        step={step}
-        min={minValue || 0}
-        max={maxValue}
+        type={rest.type || "text"}
         className={clsx(
           "w-full rounded-lg border px-4 py-2 focus:outline-primary",
           errors[id]?.message &&
@@ -46,6 +38,7 @@ export function FormField({
         )}
         value={field.value}
         onChange={field.onChange}
+        {...rest}
       />
       {errors[id] && (
         <p className="mt-1 text-xs text-error">

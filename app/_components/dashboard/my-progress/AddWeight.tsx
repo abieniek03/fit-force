@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 import { Alert } from "../../Alert";
 import { Dialog } from "../../Dialog";
@@ -27,6 +27,20 @@ export function AddWeight() {
   });
 
   const sessionToken = getSessionToken();
+
+  const getCampData = async () => {
+    try {
+      const response = await axios.get(`/training-camp/${campId}`, {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      });
+
+      return response.data;
+    } catch (error: any) {
+      return error.data;
+    }
+  };
 
   const addWeight = async (data: IAddWeightForm) => {
     try {
@@ -55,11 +69,21 @@ export function AddWeight() {
       console.log(error);
     }
   };
+  const camp = useQuery({
+    queryKey: ["getCampData"],
+    queryFn: getCampData,
+  });
+
+  const campData = camp?.data?.data;
 
   const { mutate, isPending, isError, isSuccess } = useMutation({
     mutationKey: ["addWeight"],
     mutationFn: addWeight,
   });
+
+  const formattedDate = (date: string) => {
+    return date.split("T")[0];
+  };
 
   useEffect(() => {
     isSuccess && window.location.reload();
@@ -70,14 +94,14 @@ export function AddWeight() {
       <FormProvider {...addWeightForm}>
         <form onSubmit={addWeightForm.handleSubmit(sendForm)}>
           {isError && <Alert type="error">Nie udało się dodać wagi.</Alert>}
-          <FormField id="date" type="date" label="Data" />
           <FormField
-            id="weight"
-            type="number"
-            label="Waga"
-            step="0.1"
-            minValue={30}
+            id="date"
+            type="date"
+            label="Data"
+            min={formattedDate(campData?.startDate || "")}
+            max={formattedDate(campData?.endDate || "")}
           />
+          <FormField id="weight" type="number" label="Waga" step="0.1" />
           <Button styleType="primary" wFull={true} loading={isPending}>
             Dodaj
           </Button>
