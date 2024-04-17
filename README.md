@@ -1,7 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
-demo: https://fit-force-students.vercel.app/logowanie
+DEMO: https://fit-force-students.vercel.app/logowanie  \
+BACKEND REPO: https://github.com/abieniek03/fit-force-backend
+
 #### Test login data
 email: test@user.pl \
 password: P@sswordStrong123
