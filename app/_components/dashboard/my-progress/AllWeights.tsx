@@ -14,7 +14,7 @@ export async function AllWeights({ campId }: Props) {
   return (
     <>
       <Dialog triggerLabel="Zobacz pozostałe" triggerType="accent" title="Waga">
-        <div className="max-h-1/2 overflow-y-auto">
+        <div className="max-h-[50vh] overflow-y-auto">
           {data.map((el: IWeight, index: number) => (
             <div
               className="grid grid-cols-6 px-2 py-1 odd:bg-slate-100"
@@ -27,7 +27,7 @@ export async function AllWeights({ campId }: Props) {
               <span className="flex items-center justify-end">
                 <CalcDifference
                   weight={Number(el.weight)}
-                  prevWeight={Number(data[index - 1]?.weight)}
+                  prevWeight={Number(data[index + 1]?.weight)}
                 />
               </span>
             </div>

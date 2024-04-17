@@ -20,11 +20,10 @@ export function Button({
   path,
   wFull,
   loading,
-  onClick,
   ...rest
 }: Readonly<ComponentProps<"button"> & Props>) {
   const buttonStyles = clsx(
-    "rounded-lg px-4 py-2  text-accent transition-all duration-200 outline-primary",
+    "rounded-lg px-4 py-2 text-accent transition-all duration-200 outline-primary",
     styleType ? `bg-${styleType}` : "bg-secondary",
     size ? `text-${size}` : "",
     wFull ? "w-full" : "",
@@ -40,12 +39,7 @@ export function Button({
   }
 
   return (
-    <button
-      className={buttonStyles}
-      onClick={onClick}
-      disabled={loading}
-      {...rest}
-    >
+    <button className={buttonStyles} disabled={loading} {...rest}>
       {loading ? (
         <svg
           aria-hidden="true"
