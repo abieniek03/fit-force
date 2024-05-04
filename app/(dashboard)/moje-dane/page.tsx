@@ -2,6 +2,7 @@ import { Metadata } from "next/types";
 import Image from "next/image";
 import { currentUser } from "@clerk/nextjs";
 import { differenceInYears } from "date-fns";
+import clsx from "clsx";
 
 import { DashboardPageTitle } from "@/app/_components/dashboard/DashboardPageTitle";
 import { fetchData } from "@/app/_utils/fetch/fetchData";
@@ -22,10 +23,45 @@ export default async function DashboardPage() {
   };
 
   const calcBmi = () => {
-    const bmi =
+    const value =
       latestWeight.data.weight / Math.pow(userProfile.data.height / 100, 2);
-    return bmi.toFixed(1);
+    return Number(value.toFixed(1));
   };
+
+  const setBmiInfo = (bmi: number) => {
+    let info: string;
+
+    switch (true) {
+      case bmi >= 16 && bmi < 17:
+        info = "wychudzenie";
+        break;
+      case bmi >= 17 && bmi < 18.5:
+        info = "niedowaga";
+        break;
+      case bmi >= 18.5 && bmi < 25:
+        info = "Prawidłowe";
+        break;
+      case bmi >= 25 && bmi < 30:
+        info = "nadwaga";
+        break;
+      case bmi >= 30 && bmi < 35:
+        info = "otyłość I stopnia";
+        break;
+      case bmi >= 35 && bmi < 40:
+        info = "otyłość II stopnia";
+        break;
+      case bmi > 40:
+        info = "otyłość III stopnia";
+        break;
+      default:
+        info = "wygłodzenie";
+    }
+
+    return info;
+  };
+
+  const bmi = calcBmi();
+  const bmiInfo = setBmiInfo(bmi);
 
   return (
     <>
@@ -56,11 +92,23 @@ export default async function DashboardPage() {
               <td className="w-full">Waga</td>
               <td className="text-right"> {latestWeight.data.weight}</td>
             </tr>
-            <tr>
-              <td className="w-full">BMI</td>
-              <td className="text-right"> {calcBmi()}</td>
-            </tr>
           </table>
+
+          <div className="mt-8 text-center">
+            <p className="mb-2 text-3xl">BMI</p>
+            <p className="text-6xl">{bmi}</p>
+            <p
+              className={clsx(
+                "uppercase",
+                bmi >= 18.5 && bmi < 25 && "text-green-500",
+                ((bmi >= 17 && bmi < 18.5) || (bmi >= 25 && bmi < 30)) &&
+                  "text-orange-600",
+                (bmi < 17 || bmi >= 30) && "text-red-600",
+              )}
+            >
+              {bmiInfo}
+            </p>
+          </div>
         </div>
       </div>
     </>
