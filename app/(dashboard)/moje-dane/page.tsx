@@ -1,5 +1,4 @@
 import { Metadata } from "next/types";
-import Image from "next/image";
 import { currentUser } from "@clerk/nextjs";
 import { differenceInYears } from "date-fns";
 import clsx from "clsx";
@@ -68,18 +67,9 @@ export default async function DashboardPage() {
 
       <div className="mt-8 rounded-md border p-4">
         <div className="mb-4 flex flex-col items-center justify-center border-b pb-4">
-          <Image
-            src={user?.imageUrl || ""}
-            alt={`${user?.firstName} - zdjęcie`}
-            width={50}
-            height={50}
-            className="mb-2 rounded-full"
-          />
-          <div>
-            <p className="text-xl text-content/50">
-              {user?.firstName}, {calcAge(userProfile.data.birthDate)}
-            </p>
-          </div>
+          <p className="text-xl text-content/50">
+            {user?.firstName}, {calcAge(userProfile.data.birthDate)}
+          </p>
         </div>
         <div className="mx-auto max-w-xs opacity-75">
           <table>
