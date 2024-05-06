@@ -15,7 +15,6 @@ export default async function DashboardPage() {
   const user = await currentUser();
 
   const userProfile = await fetchData("/user-profile");
-
   const latestWeight = await fetchData("/weight/bmi");
 
   const calcAge = (birthDate: Date) => {
