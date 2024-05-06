@@ -69,6 +69,7 @@ export function AddWeight() {
       console.log(error);
     }
   };
+  
   const camp = useQuery({
     queryKey: ["getCampData"],
     queryFn: getCampData,
